@@ -157,7 +157,6 @@ public class MainController extends Application {
     }
 
     private void initData() {
-        humans.add(new Human("Alex", 27, "1991-12-20"));
         humans.add(new Human("Pavel", 27, new Date()));
     }
 }

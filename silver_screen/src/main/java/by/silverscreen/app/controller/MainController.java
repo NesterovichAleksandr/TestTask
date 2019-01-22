@@ -1,6 +1,7 @@
 package by.silverscreen.app.controller;
 
 import by.silverscreen.app.pojo.Human;
+import by.silverscreen.app.utils.Utils;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,7 +55,6 @@ public class MainController extends Application {
                 selected = (Human) newValue;
             }
         });
-
         buttonAdd.setOnAction(event -> {
             try {
                 addNewHuman();
@@ -63,14 +62,9 @@ public class MainController extends Application {
                 e.printStackTrace();
             }
         });
-
         buttonEdit.setOnAction(event -> {
             if (selected == null) {
-                Alert warn = new Alert(Alert.AlertType.ERROR);
-                warn.setTitle("Edit");
-                warn.setHeaderText("Выберите сущность для редактирования!");
-                warn.setContentText("");
-                warn.showAndWait();
+                Utils.showWarning("Выберите строку для редактирования!");
             } else {
                 try {
                     editHuman();
@@ -79,11 +73,9 @@ public class MainController extends Application {
                 }
             }
         });
-
         buttonDelete.setOnAction(event -> {
             deleteHuman();
         });
-
         birthdayVerification();
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Human, String>("name"));
@@ -131,11 +123,7 @@ public class MainController extends Application {
 
     public void deleteHuman() {
         if (selected == null) {
-            Alert warn = new Alert(Alert.AlertType.ERROR);
-            warn.setTitle("Delete");
-            warn.setHeaderText("Выберите строку для удаления!");
-            warn.setContentText("");
-            warn.showAndWait();
+            Utils.showWarning("Выберите строку для удаления!");
         } else {
             humans.remove(selected);
         }
@@ -147,11 +135,7 @@ public class MainController extends Application {
                     event.getClickCount() == 2 &&
                     selected.getBithString(simpleBithFormat).equals(simpleBithFormat.format(today))
             ) {
-                Alert success = new Alert(Alert.AlertType.ERROR);
-                success.setTitle("Happy Birthday!!!");
-                success.setHeaderText("Сегодня у " + selected.getName() + " день рождения.");
-                success.setContentText("");
-                success.showAndWait();
+                Utils.showWarning("Сегодня у " + selected.getName() + " день рождения.");
             }
         });
     }

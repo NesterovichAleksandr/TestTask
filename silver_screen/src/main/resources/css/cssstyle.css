@@ -1,0 +1,16 @@
+.table-view {
+    -fx-control-inner-background: #d9ebf7;
+    -fx-background-color: #d7ffd9;
+    -fx-table-cell-border-color: rgba(141, 141, 141, 0.3);
+    -fx-padding: 5;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: rgba(1, 0, 165, 0.74);
+}
+
+.button {
+    -fx-background-color: #8f8c9c;
+    -fx-text-fill: #100a5e;
+}
+

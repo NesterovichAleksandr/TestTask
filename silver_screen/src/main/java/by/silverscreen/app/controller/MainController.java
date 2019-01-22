@@ -1,6 +1,7 @@
 package by.silverscreen.app.controller;
 
 import by.silverscreen.app.pojo.Human;
+import by.silverscreen.app.utils.IdGenerate;
 import by.silverscreen.app.utils.Utils;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -116,9 +117,12 @@ public class MainController extends Application {
         stage.setTitle("Edit human");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/edit.fxml"));
         Parent root = loader.load();
+        EditController controller = loader.getController();
+        controller.init(this, selected);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.showAndWait();
+        this.selected = controller.getHuman();
     }
 
     public void deleteHuman() {
@@ -133,7 +137,7 @@ public class MainController extends Application {
         tableHumans.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) &&
                     event.getClickCount() == 2 &&
-                    selected.getBithString(simpleBithFormat).equals(simpleBithFormat.format(today))
+                    selected.getBirthdayString(simpleBithFormat).equals(simpleBithFormat.format(today))
             ) {
                 Utils.showWarning("Сегодня у " + selected.getName() + " день рождения.");
             }
@@ -141,6 +145,6 @@ public class MainController extends Application {
     }
 
     private void initData() {
-        humans.add(new Human("Pavel", 27, new Date()));
+        humans.add(new Human(IdGenerate.getNextId(), "Pavel", 27, new Date()));
     }
 }

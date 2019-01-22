@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Utils {
 
     public static void showWarning(String text) {
-        Alert warn = new Alert(Alert.AlertType.ERROR);
+        Alert warn = new Alert(Alert.AlertType.WARNING);
         warn.setTitle("Предупреждение!");
         warn.setHeaderText(text);
         warn.showAndWait();

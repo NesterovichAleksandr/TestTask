@@ -6,7 +6,6 @@ import by.silverscreen.app.utils.Utils;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -84,18 +83,9 @@ public class MainController extends Application {
         ageColumn.setCellValueFactory(new PropertyValueFactory<Human, Integer>("age"));
         birthdayColumn.setCellValueFactory(new PropertyValueFactory<Human, Date>("birthday"));
 
-        SortedList<Human> sortedList = new SortedList<>(humans,
-                (Human human1, Human human2) -> {
-                    if (human1.getAge() < human2.getAge()) {
-                        return -1;
-                    } else if (human1.getAge() > human2.getAge()) {
-                        return 1;
-                    } else {
-                        return 0;
-                    }
-                });
-
-        tableHumans.setItems(sortedList);
+        tableHumans.setItems(humans);
+        nameColumn.setSortType(TableColumn.SortType.ASCENDING);
+        tableHumans.getSortOrder().add(nameColumn);
     }
 
     @Override

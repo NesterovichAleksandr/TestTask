@@ -1,0 +1,14 @@
+﻿1)Добавить сервис создания пользователя(регистрация)
+2)Добавить Controller (rest)
+3)авторизация oauth 2.0 jwt
+4)страница регистрации
+5)страница авторизации
+
+
+
+http://localhost:8083/user/common/registration
+{
+    "name": "user",
+     "lastName": "test",
+     "email": "testuser@example.com"
+}

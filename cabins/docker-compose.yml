@@ -1,0 +1,30 @@
+version: "3.2"
+services:
+#    openldap:
+#          image: niccky/openldap
+#          container_name: openldap
+#          stdin_open: true
+#          volumes:
+#            - /var/lib/ldap
+#            - /etc/ldap/slapd.d
+#            - /container/service/slapd/assets/certs/
+#          ports:
+#            - "389:389/tcp"
+#            - "636:636/tcp"
+#          domainname: "cabinssolitude.net"
+#          hostname: "cabinssolitude.net"
+#          env_file:
+#            - config-ldap.env
+    db:
+      image: postgres
+      ports:
+        - "5432:5432/tcp"
+      environment:
+        - POSTGRES_USER=cabinssolitude
+        - POSTGRES_PASSWORD=cabinssolitude2018
+      volumes:
+        - postgresql:/var/lib/postgresql
+        - postgresql_data:/var/lib/postgresql/data
+volumes:
+  postgresql:
+  postgresql_data:

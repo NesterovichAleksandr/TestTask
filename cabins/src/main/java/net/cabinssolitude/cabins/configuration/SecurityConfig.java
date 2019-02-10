@@ -28,7 +28,7 @@ import javax.annotation.Resource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    @Qualifier("userServiceImpl")
+    //@Qualifier("userServiceImpl")
     private UserDetailsService userDetailsService;
 
     @Override
@@ -49,22 +49,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .anonymous().disable()
                 .authorizeRequests()
-                .antMatchers("/api-docs/**").permitAll();
+                .antMatchers("/**").permitAll();
     }
 
     @Bean
-    public BCryptPasswordEncoder encoder(){
+    public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService () {
-////        UserDetails user = User.builder ()/*. Username ("user"). Password ("secret").
-////                roles ("USER")*/. build ();
-////        UserDetails userAdmin = User.builder ()/*. Username ("admin"). Password ("secret").
-////                roles ("ADMIN")*/. build ();
-////        return new InMemoryUserDetailsManager(user, userAdmin);
-//        return null;
-//    }
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.builder()
+                .username("user")
+                .password("secret")
+                .roles("USER")
+                .build();
+        UserDetails userAdmin = User.builder()
+                .username("admin")
+                .password("secret")
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user, userAdmin);
+    }
 }

@@ -26,7 +26,7 @@ class UserController {
         userService.create(user);
     }
 
-    @GetMapping(value="")
+    @GetMapping(value="/all")
     public List listUser(){
         return userService.findAll();
     }
@@ -35,5 +35,11 @@ class UserController {
     public String delete(@PathVariable(value = "id") Long id){
         userService.delete(id);
         return "success";
+    }
+
+    @GetMapping
+    public String index(){
+
+        return "index";
     }
 }

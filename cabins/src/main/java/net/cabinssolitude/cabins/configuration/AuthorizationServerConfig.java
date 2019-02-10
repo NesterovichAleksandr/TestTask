@@ -42,17 +42,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
+        /*
+         TokenStore или же  IdentifierStore где хранятся идентификаторы, которые предоставляет наш сервер аутентификации, поэтому, когда сервер ресурсов (хранилище) запрашивает кредит на кредитной карте, он может ответить на него. В этом случае мы используем  InMemoryTokenStore класс, который будет хранить идентификаторы в памяти. В реальном приложении мы могли бы использоватьJdbcTokenStore сохранить их в базе данных, чтобы в случае отказа приложения клиентам не приходилось обновлять свои кредитные карты.*/
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-
+        /*Здесь мы уточняем учетные данные банка, я говорю администратора аутентификаций и предлагаемых услуг. Да, во множественном числе, потому что для доступа к банку у нас должны быть имя пользователя и пароль для каждой из предлагаемых услуг. Это очень важная концепция: пользователь и пароль принадлежат банку, а не клиенту. Для каждой услуги, предлагаемой банком, будет проведена единая аутентификация, хотя она может быть одинаковой для разных услуг.*/
         configurer
-                .inMemory()
-                .withClient(CLIEN_ID)
+                .inMemory() //указывает, что мы собираемся хранить сервисы в памяти. В «реальном» приложении мы сохраняем его в базе данных, на сервере LDAP и т. Д.
+                .withClient(CLIEN_ID)//это пользователь, с которым мы будем идентифицировать себя...
                 .secret(CLIENT_SECRET)
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
-                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )//мы указываем службы, которые настраиваются для определенного пользователя, для CLIEN_ID. В нашем примере мы будем использовать только службу паролей .
+                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)//это сфера обслуживания
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
                 refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
     }
@@ -62,5 +64,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter());
+        /*здесь мы определяем, какой контроллер аутентификации и хранилище идентификаторов должны использовать конечные точки. Уточните, что конечными точками являются URL-адреса, по которым мы будем разговаривать с нашим «банком», чтобы запросить карты.*/
     }
 }

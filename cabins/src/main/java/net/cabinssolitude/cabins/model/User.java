@@ -34,10 +34,11 @@ public class User {
     @Column
     private String lastName;
 
-//    @NotBlank
-//    @Size(min = 1, max = 100)
-//    @ManyToMany
-//    private Set<Role> roles;
+    @NotBlank
+    @Size(min = 1, max = 100)
+    @Column
+    private String password;
+
     //private LocalDateTime lastVisit;
     //private String locale;
 

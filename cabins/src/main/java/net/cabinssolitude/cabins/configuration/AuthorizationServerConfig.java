@@ -16,8 +16,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    static final String CLIEN_ID = "devglan-client";
-    static final String CLIENT_SECRET = "devglan-secret";
+    static final String CLIEN_ID = "admin";
+    static final String CLIENT_SECRET = "cabins";
     static final String GRANT_TYPE_PASSWORD = "password";
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String REFRESH_TOKEN = "refresh_token";

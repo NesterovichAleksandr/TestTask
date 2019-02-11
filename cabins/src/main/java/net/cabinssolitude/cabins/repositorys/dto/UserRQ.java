@@ -29,4 +29,10 @@ public class UserRQ {
     @NotBlank
     @Size(min = 1, max = 200)
     private String email;
+
+    @JsonProperty("password")
+    @NotBlank
+    @Size(min = 1, max = 200)
+    private String password;
+
 }

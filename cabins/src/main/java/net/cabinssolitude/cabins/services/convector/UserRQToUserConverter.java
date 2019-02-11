@@ -19,6 +19,7 @@ public class UserRQToUserConverter implements Converter<UserRQ, User> {
         user.setName(userRQ.getName());
         user.setLastName(userRQ.getLastName());
         user.setEmail(userRQ.getEmail());
+        user.setPassword(userRQ.getPassword());
         return user;
     }
 }

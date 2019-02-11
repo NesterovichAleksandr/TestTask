@@ -62,12 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
                 .username("user")
-                .password("secret")
+                .password("user")
                 .roles("USER")
                 .build();
         UserDetails userAdmin = User.builder()
                 .username("admin")
-                .password("secret")
+                .password("admin")
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, userAdmin);

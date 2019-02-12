@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    private UserRQToUserConverter userRQToUserConverter;
-
     @Autowired
     private UserRepository userRepository;
 

@@ -38,7 +38,6 @@ public class UserRQ {
     private String password;
 
     @JsonProperty("roles")
-    //@Size(min = 1, max = 200)
     private Set<Role> roles;
 
 }

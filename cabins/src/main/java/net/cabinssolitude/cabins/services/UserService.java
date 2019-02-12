@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    //Optional<User> save(User user);
 
     User create(User user);
     void delete(long id);
@@ -15,6 +14,4 @@ public interface UserService {
     User edit(User user);
     List<User> findAll();
     User findOne(long id);
-
-
 }

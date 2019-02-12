@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserRQToUserConverter implements Converter<UserRQ, User> {
 
-    private static final String SALT = "abcdefghijklmnopqrstuvwxyz1234567890";
-    private static final Integer SALT_LENGTH = 18;
-
     @Override
     public User convert(final UserRQ userRQ) {
         User user = new User();

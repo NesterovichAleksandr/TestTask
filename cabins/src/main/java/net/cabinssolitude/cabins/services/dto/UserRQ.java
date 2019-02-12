@@ -1,4 +1,4 @@
-package net.cabinssolitude.cabins.repositorys.dto;
+package net.cabinssolitude.cabins.services.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

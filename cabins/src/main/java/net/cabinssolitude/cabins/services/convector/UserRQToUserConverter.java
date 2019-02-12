@@ -2,7 +2,7 @@ package net.cabinssolitude.cabins.services.convector;
 
 import lombok.RequiredArgsConstructor;
 import net.cabinssolitude.cabins.model.User;
-import net.cabinssolitude.cabins.repositorys.dto.UserRQ;
+import net.cabinssolitude.cabins.services.dto.UserRQ;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

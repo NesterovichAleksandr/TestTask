@@ -2,7 +2,7 @@ package net.cabinssolitude.cabins.controller;
 
 import lombok.RequiredArgsConstructor;
 import net.cabinssolitude.cabins.model.User;
-import net.cabinssolitude.cabins.repositorys.dto.UserRQ;
+import net.cabinssolitude.cabins.services.dto.UserRQ;
 import net.cabinssolitude.cabins.services.UserService;
 import net.cabinssolitude.cabins.services.convector.UserRQToUserConverter;
 import org.springframework.web.bind.annotation.*;

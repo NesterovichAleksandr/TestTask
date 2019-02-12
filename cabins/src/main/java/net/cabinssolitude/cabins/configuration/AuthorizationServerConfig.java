@@ -29,8 +29,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6 * 60 * 60;
 
 
+    private final AuthenticationManager authenticationManager;
+
     @Autowired
-    private AuthenticationManager authenticationManager;
+    public AuthorizationServerConfig(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {

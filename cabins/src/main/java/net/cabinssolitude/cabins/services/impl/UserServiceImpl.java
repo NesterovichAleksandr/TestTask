@@ -23,8 +23,12 @@ import java.util.stream.Collectors;
 @Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User create(User user) {
@@ -68,7 +72,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
     private Set<GrantedAuthority> getAuthorities(User user) {
         Set<Role> roleByUserId = user.getRoles();
-        final Set<GrantedAuthority> authorities = roleByUserId.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toString().toUpperCase())).collect(Collectors.toSet());
-        return authorities;
+        return roleByUserId.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toString().toUpperCase())).collect(Collectors.toSet());
     }
 }

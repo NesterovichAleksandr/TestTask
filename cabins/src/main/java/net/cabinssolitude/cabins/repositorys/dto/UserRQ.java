@@ -3,11 +3,13 @@ package net.cabinssolitude.cabins.repositorys.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import net.cabinssolitude.cabins.model.Role;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
@@ -34,5 +36,9 @@ public class UserRQ {
     @NotBlank
     @Size(min = 1, max = 200)
     private String password;
+
+    @JsonProperty("roles")
+    //@Size(min = 1, max = 200)
+    private Set<Role> roles;
 
 }

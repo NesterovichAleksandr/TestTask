@@ -1,5 +1,6 @@
 package net.cabinssolitude.cabins.services.impl;
 
+import net.cabinssolitude.cabins.model.Role;
 import net.cabinssolitude.cabins.model.User;
 import net.cabinssolitude.cabins.repositorys.UserRepository;
 import net.cabinssolitude.cabins.repositorys.dto.UserRQ;
@@ -12,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service//(value = "userService")
+@Transactional
+@Service(value = "userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
 
     private UserRQToUserConverter userRQToUserConverter;
@@ -57,20 +60,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user = userRepository.findByName(username);
-//        if(user == null){
-//            //log.error("Invalid username or password.");
-//            throw new UsernameNotFoundException("Invalid username or password.");
-//        }
-//        Set<GrantedAuthority> grantedAuthorities = getAuthorities(user);
-//
-//
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-        return null;
+        User user = userRepository.findByName(username);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        Set<GrantedAuthority> grantedAuthorities = getAuthorities(user);
+
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), grantedAuthorities);
     }
-//    private Set<GrantedAuthority> getAuthorities(User user) {
-//        Set<Role> roleByUserId = user.getRoles();
-//        final Set<GrantedAuthority> authorities = roleByUserId.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toString().toUpperCase())).collect(Collectors.toSet());
-//        return authorities;
-//    }
+    private Set<GrantedAuthority> getAuthorities(User user) {
+        Set<Role> roleByUserId = user.getRoles();
+        final Set<GrantedAuthority> authorities = roleByUserId.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toString().toUpperCase())).collect(Collectors.toSet());
+        return authorities;
+    }
 }

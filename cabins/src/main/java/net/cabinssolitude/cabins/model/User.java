@@ -39,6 +39,10 @@ public class User {
     @Column
     private String password;
 
+    //@Size(min = 1, max = 100)
+    @ManyToMany(cascade = {CascadeType.ALL})
+    private Set<Role> roles;
+
     //private LocalDateTime lastVisit;
     //private String locale;
 
